@@ -1,0 +1,5 @@
+<launch>
+    
+    <node name="twist_puber" pkg="uav_nav" type="cmd_twist.py" output="screen"></node>
+    <node name="keyboard_twist" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen"></node>
+</launch>

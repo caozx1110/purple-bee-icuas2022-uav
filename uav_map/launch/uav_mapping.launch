@@ -1,0 +1,24 @@
+<launch>
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 red/base_link red/imu" />
+
+    <!-- mapping with cartographer -->
+    <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="
+        -configuration_directory $(find uav_map)/config
+        -configuration_basename carto_3d.lua" 
+        output="screen">
+
+        <!-- nav_msgs/Odometry -->
+        <remap from="odom" to="/red/odometry" />
+
+        <!-- sensor_msgs/Imu -->
+        <remap from="imu" to="/red/imu" />
+
+        <!-- sensor_msgs/PointCloud2 -->
+        <remap from="points2" to="/red/camera/depth_registered/points" /> 
+
+    </node>
+
+    <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find uav_map)/rviz/demo_3d.rviz" />    
+
+</launch>

@@ -1,0 +1,9 @@
+<launch>
+
+    <arg name="rviz" default="true" />
+    <arg name="rviz_cfg" default="$(find uav_nav)/rviz/move_base.rviz" />
+
+    <include file="$(find uav_nav)/launch/move_base.launch" />
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_cfg)" />
+
+</launch>
